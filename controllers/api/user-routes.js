@@ -13,10 +13,13 @@ router.post("/", (req, res) => {
     username: req.body.username,
     email: req.body.email,
     password: req.body.password,
-  }).then((newUser) => {
-      res.json(newUser)
-  });
+  })
+    .then((newUser) => {
+      res.json(newUser);
+    })
+    .catch((err) => {
+      res.json(err);
+    });
 });
-
 
 module.exports = router;
