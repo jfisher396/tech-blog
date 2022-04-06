@@ -8,18 +8,16 @@ router.get("/", (req, res) => {
   });
 });
 
-router.post("/", (req, res) => {
-  User.create({
-    username: req.body.username,
-    email: req.body.email,
-    password: req.body.password,
-  })
-    .then((newUser) => {
-      res.json(newUser);
-    })
-    .catch((err) => {
-      res.json(err);
+router.post('/', async (req, res) => {
+  try {
+    const newUser = await User.create({
+      username: req.body.username,
+      password: req.body.password,
+      email: req.body.email
     });
-});
-
+    res.json(newUser)
+  } catch (err) {
+    res.status(500).json(err);
+  }
+})
 module.exports = router;
