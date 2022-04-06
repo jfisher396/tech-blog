@@ -5,13 +5,13 @@ const app = express();
 const PORT = process.env.PORT || 3001;
 const allRoutes = require("./controllers");
 
-const User = require('./models/User')
+const User = require('./models/User');
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 app.use("/", allRoutes);
 
-sequelize.sync({ force: true }).then(() => {
+sequelize.sync({ force: false }).then(() => {
   app.listen(PORT, () => console.log(`App listening on PORT ${PORT}`));
 });
