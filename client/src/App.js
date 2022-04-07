@@ -1,13 +1,20 @@
 import React from "react";
-import './App.css';
-import Nav from "./components/Navbar/Navbar";
-// import Container from "./components/Container"
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import "./App.css";
+import Navbar from "./components/Navbar/Navbar";
+import Home from "./pages/Home/Home";
+import Dashboard from "./pages/Dashboard/Dashboard";
 
 function App() {
   return (
     <div className="App">
-      <Nav />
-      {/* <Container /> */}
+      <Navbar />
+      <BrowserRouter>
+        <Routes>
+          <Route index element={<Home />} />
+          <Route path="dashboard" element={<Dashboard />} />
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }
