@@ -10,6 +10,6 @@ app.use(express.json());
 
 app.use("/", allRoutes);
 
-sequelize.sync({ force: true }).then(() => {
+sequelize.sync({ force: false }).then(() => {
   app.listen(PORT, () => console.log(`App listening on PORT ${PORT}`));
 });

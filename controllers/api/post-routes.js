@@ -16,4 +16,10 @@ router.post("/", async (req, res) => {
   }
 });
 
+router.get("/", (req, res) => {
+  Post.findAll().then((postsData) => {
+    res.json(postsData)
+  })
+})
+
 module.exports = router;
