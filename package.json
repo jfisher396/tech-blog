@@ -29,6 +29,7 @@
     "generate-function": "^2.3.1",
     "http-errors": "^1.8.1",
     "iconv-lite": "^0.4.24",
+    "if-env": "^1.0.4",
     "inflection": "^1.13.2",
     "inherits": "^2.0.4",
     "ipaddr.js": "^1.9.1",
@@ -81,8 +82,13 @@
     "yallist": "^4.0.0"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
+    "start:prod": "node server.js",
+    "start:dev": "concurrently \"nodemon --ignore 'client/*'\" \"npm run client\"",
+    "client": "cd client && npm run start",
+    "install": "cd client && npm install",
+    "build": "cd client && npm run build",
+    "heroku-postbuild": "npm run build"
   },
   "repository": {
     "type": "git",
