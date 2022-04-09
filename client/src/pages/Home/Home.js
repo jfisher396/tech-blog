@@ -1,29 +1,21 @@
-import React, { Component } from "react"
-import axios from 'axios'
+import React, { useEffect, useState } from "react";
+import API from "../../utils/API";
 
-export default class Home extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      posts: [],
-    };
+function Home() {
+  const [posts, setPosts] = useState([]);
+
+  useEffect(() => {
+    loadPosts();
+  }, []);
+
+  function loadPosts() {
+    API.getPosts().then((res) => {
+      console.log(res.data);
+      setPosts(res.data);
+    });
   }
 
-  componentDidMount() {
-      this.postsAPI();
-  }
-
-  postsAPI(){
-      axios.get("/api/posts").then((res) => {
-          console.log(res.data)
-      }).catch((err) => console.log(err))
-  }
-
-  render() {
-    return (
-      <>
-        <h1>Homepage</h1>
-      </>
-    );
-  }
+  return <div>Home</div>;
 }
+
+export default Home;
