@@ -11,7 +11,6 @@ function Home() {
 
   function loadPosts() {
     API.getPosts().then((res) => {
-      console.log(res.data);
       setPosts(res.data);
     });
   }
