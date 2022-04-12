@@ -8,8 +8,8 @@ import Dashboard from "./pages/Dashboard/Dashboard";
 function App() {
   return (
     <div className="App">
-      <Navbar />
       <BrowserRouter>
+        <Navbar />
         <Routes>
           <Route index element={<Home />} />
           <Route path="dashboard" element={<Dashboard />} />

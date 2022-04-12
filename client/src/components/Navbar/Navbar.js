@@ -1,14 +1,16 @@
 import React from "react";
-import "./Navbar.css"
+import { Link, useLocation } from "react-router-dom";
+import "./Navbar.css";
 
-export default function Navbar() {
+export default function Navbar(props) {
+  const location = useLocation();
   return (
     <>
       <div className="navbar">
-        <h1><a href="#">Tech-Blog</a></h1>
+        <Link to="/"><h1>Tech-Blog</h1></Link>
         <div className="navbar-links">
-          <h3><a href="#">Dashboard</a></h3>
-          <h3><a href="#">Login</a></h3>
+          <Link to="dashboard"><h3>Dashboard</h3></Link>
+          <h3>Login</h3>
         </div>
       </div>
     </>
