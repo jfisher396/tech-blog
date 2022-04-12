@@ -31,7 +31,7 @@ router.post("/login", async (req, res) => {
         if (bcrypt.compareSync(req.body.password, userData.password)) {
           console.log("logged in")
           req.session.user = {
-            name: userData.name,
+            username: userData.username,
             id: userData.id,
           };
           res.json(req.session);
