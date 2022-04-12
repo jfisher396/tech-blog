@@ -18,17 +18,18 @@ router.post("/signup", async (req, res) => {
 });
 
 router.post("/login", async (req, res) => {
+  console.log(req.body.username) 
   try {
     User.findOne({
       where: {
-        email: req.body.email,
-      },
+        username: req.body.username
+      }
     }).then((userData) => {
       if (!userData) {
         res.status(404).send("No user found with that email");
       } else {
         if (bcrypt.compareSync(req.body.password, userData.password)) {
-
+          console.log("logged in")
           req.session.user = {
             name: userData.name,
             id: userData.id,
