@@ -1,13 +1,13 @@
 .navbar {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    align-items: baseline;
-    color: rgb(84, 84, 84);
+    min-height: 110px;
 }
 
-.navbar-links {
+.register-link {
+    padding-top: 5px;
     display: flex;
-    justify-content: space-around;
-    width: 20%;
+    justify-content: flex-end;
+}
+
+#register-link-label {
+    padding-right: 20px;
 }

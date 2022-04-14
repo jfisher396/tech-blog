@@ -17,19 +17,20 @@ router.post("/signup", async (req, res) => {
   }
 });
 
+// route to login as a user
 router.post("/login", async (req, res) => {
-  console.log(req.body.username) 
+  console.log(req.body.username);
   try {
     User.findOne({
       where: {
-        username: req.body.username
-      }
+        username: req.body.username,
+      },
     }).then((userData) => {
       if (!userData) {
         res.status(404).send("No user found with that email");
       } else {
         if (bcrypt.compareSync(req.body.password, userData.password)) {
-          console.log("logged in")
+          console.log("logged in");
           req.session.user = {
             username: userData.username,
             id: userData.id,
@@ -47,8 +48,8 @@ router.post("/login", async (req, res) => {
 });
 
 //route to view active session
-router.get('/readsessions', (req,res) => {
-  res.json(req.session)
-})
+router.get("/readsessions", (req, res) => {
+  res.json(req.session);
+});
 
 module.exports = router;
