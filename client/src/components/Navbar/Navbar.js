@@ -6,19 +6,19 @@ import "./Navbar.css";
 //  TODO:Need CSS rules for nav-link and active
 
 export default function Navbar(props) {
-  const location = useLocation();
+  // const location = useLocation();
 
   return (
     <>
-      <nav className="navbar" role="navigation" aria-label="main navigation">
+      <nav className="navbar is-dark" role="navigation" aria-label="main navigation">
         <div className="navbar-brand">
-          <Link to="/" className="navbar-item" href="#">
-            <img
+          <Link to="/" className="navbar-item" href="#">TECH-BLOG
+            {/* <img
               src="https://bulma.io/images/bulma-logo.png"
               width="112"
               height="28"
               alt="logo"
-            />
+            /> */}
           </Link>
           <a
             role="button"
@@ -48,7 +48,7 @@ export default function Navbar(props) {
             {props.currentUser ? (
               <>
                 <span>Logged in as {props.currentUser.username}</span>{" "}
-                <button className="button is-primary" onClick={props.logout}>
+                <button className="button is-success" onClick={props.logout}>
                   Logout
                 </button>
               </>
@@ -64,7 +64,7 @@ export default function Navbar(props) {
                   <Link to="/register"><button className="button is-success">Register</button></Link>
                 </div>
                 {props.currentUser ? (
-                  <button className="button is-primary" onClick={props.logout}>Logout</button>
+                  <button className="button is-success" onClick={props.logout}>Logout</button>
                 ) : null}
               </div>
             )}

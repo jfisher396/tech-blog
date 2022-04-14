@@ -36,7 +36,7 @@ function LoginForm(props) {
         <span className="icon is-small is-right">
           <i className="fas fa-check"></i>
         </span>
-        <button type="submit" className="button is-primary">
+        <button type="submit" className="button is-success">
         Login
         </button>
       </div>
