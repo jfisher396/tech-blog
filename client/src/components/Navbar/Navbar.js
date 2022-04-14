@@ -61,7 +61,7 @@ export default function Navbar(props) {
                 />
                 <div className="register-link">
                   <p id="register-link-label">Not a registered user?</p>
-                  <Link to="/register">Register</Link>
+                  <Link to="/register"><button className="button is-success">Register</button></Link>
                 </div>
                 {props.currentUser ? (
                   <button className="button is-primary" onClick={props.logout}>Logout</button>

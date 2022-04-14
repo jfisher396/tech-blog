@@ -34,7 +34,7 @@ function App() {
     API.userLogin(loginFormData)
       .then((res) => {
         setLoginFormData({
-          email: "",
+          username: "",
           password: "",
         });
         API.getCurrentUser().then((res) => {
