@@ -20,10 +20,14 @@ router.post("/", async (req, res) => {
   }
 });
 
-router.get("/", (req, res) => {
-  Post.findAll().then((postsData) => {
-    res.json(postsData);
-  });
+router.get("/", async (req, res) => {
+  try {
+    await Post.findAll().then((postsData) => {
+      res.json(postsData);
+    });
+  } catch (err) {
+    res.status(500).json(err)
+  }
 });
 
 module.exports = router;

@@ -1,24 +1,22 @@
 import React from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import LoginForm from "../LoginForm/LoginForm";
 import "./Navbar.css";
-
-//  TODO:Need CSS rules for nav-link and active
 
 export default function Navbar(props) {
   // const location = useLocation();
 
   return (
     <>
-      <nav className="navbar is-dark" role="navigation" aria-label="main navigation">
+      <nav
+        className="navbar is-dark"
+        role="navigation"
+        aria-label="main navigation"
+      >
+        {/* renders site name and sets navigation to homepage */}
         <div className="navbar-brand">
-          <Link to="/" className="navbar-item" href="#">TECH-BLOG
-            {/* <img
-              src="https://bulma.io/images/bulma-logo.png"
-              width="112"
-              height="28"
-              alt="logo"
-            /> */}
+          <Link to="/" className="navbar-item" href="#">
+            TECH-BLOG
           </Link>
           <a
             role="button"
@@ -33,6 +31,7 @@ export default function Navbar(props) {
           </a>
         </div>
 
+        {/* navigation to home and dashboard pages */}
         <div id="navbarBasicExample" className="navbar-menu">
           <div className="navbar-start">
             <Link to="/" className="navbar-item">
@@ -44,15 +43,18 @@ export default function Navbar(props) {
             </Link>
           </div>
 
+          {/* login form and login/logout buttons */}
           <div className="navbar-end">
+            {/* if a user is logged in it shows there user name in navbar and renders logout button */}
             {props.currentUser ? (
               <>
-                <span>Logged in as {props.currentUser.username}</span>{" "}
+                <span id="logged-in-as-span">Logged in as {props.currentUser.username}</span>{" "}
                 <button className="button is-success" onClick={props.logout}>
                   Logout
                 </button>
               </>
             ) : (
+              // if no user is logged in a login form is rendered along with an option to register if not already a registerd user
               <div>
                 <LoginForm
                   loginData={props.loginFormData}
@@ -61,10 +63,14 @@ export default function Navbar(props) {
                 />
                 <div className="register-link">
                   <p id="register-link-label">Not a registered user?</p>
-                  <Link to="/register"><button className="button is-success">Register</button></Link>
+                  <Link to="/register">
+                    <button className="button is-success">Register</button>
+                  </Link>
                 </div>
                 {props.currentUser ? (
-                  <button className="button is-success" onClick={props.logout}>Logout</button>
+                  <button className="button is-success" onClick={props.logout}>
+                    Logout
+                  </button>
                 ) : null}
               </div>
             )}

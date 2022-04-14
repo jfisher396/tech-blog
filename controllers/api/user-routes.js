@@ -52,6 +52,7 @@ router.get("/readsessions", (req, res) => {
   res.json(req.session);
 });
 
+// route to log user out
 router.get("/logout",(req,res)=>{
     req.session.destroy();
     console.log("logged out")

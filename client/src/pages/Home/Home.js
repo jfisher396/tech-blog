@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from "react";
 import "./Home.css";
+import Container from "../../components/Container/Container"
 import API from "../../utils/API";
 
 function Home() {
+  // state handler for all posts
   const [posts, setPosts] = useState([]);
 
+  // retrieves all posts from database
   useEffect(() => {
     loadPosts();
   }, []);
@@ -17,17 +20,9 @@ function Home() {
 
   return (
     <>
+      <Container posts={posts} />
       <div className="posts-container">
-        <div>
-          {posts.map((post) => {
-            return (
-              <div key={post.id}>
-                <h3>Title: {post.title}</h3>
-                <p>{post.postBody}</p>
-              </div>
-            );
-          })}
-        </div>
+        
       </div>
     </>
   );
