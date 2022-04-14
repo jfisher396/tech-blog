@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { Post, User } = require("../../models");
+const { Post, Comment, User } = require("../../models");
 
 router.post("/", async (req, res) => {
   if (!req.session.user) {
@@ -23,12 +23,34 @@ router.post("/", async (req, res) => {
 router.get("/", async (req, res) => {
   try {
     await Post.findAll({
-      include: [User]
+      include: [User],
     }).then((postsData) => {
       res.json(postsData);
     });
   } catch (err) {
-    res.status(500).json(err)
+    res.status(500).json(err);
+  }
+});
+
+router.get("/post/:id", async (req, res) => {
+  try {
+    const postData = await Post.findByPk(req.params.id, {
+      include: [
+        User,
+        {
+          model: Comment,
+          include: [User],
+        },
+      ],
+    });
+
+    if (postData) {
+      res.json(postData);
+    } else {
+      res.status(404).end();
+    }
+  } catch (err) {
+    res.status(500).json(err);
   }
 });
 
