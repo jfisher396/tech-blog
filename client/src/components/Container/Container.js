@@ -2,7 +2,7 @@ import React from "react";
 import "./Container.css";
 
 function Container(props) {
-  console.log(props)
+  console.log(props.posts)
   return (
     <div className="container">
       <div>

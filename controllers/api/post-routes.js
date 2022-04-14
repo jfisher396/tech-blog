@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { Post } = require("../../models");
+const { Post, User } = require("../../models");
 
 router.post("/", async (req, res) => {
   if (!req.session.user) {
@@ -22,7 +22,9 @@ router.post("/", async (req, res) => {
 
 router.get("/", async (req, res) => {
   try {
-    await Post.findAll().then((postsData) => {
+    await Post.findAll({
+      include: [User]
+    }).then((postsData) => {
       res.json(postsData);
     });
   } catch (err) {
