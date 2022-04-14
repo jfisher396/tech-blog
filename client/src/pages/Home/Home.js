@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./Home.css";
-import Container from "../../components/Container/Container"
+import Container from "../../components/Container/Container";
 import API from "../../utils/API";
 
 function Home() {
@@ -18,14 +18,12 @@ function Home() {
     });
   }
 
-  return (
-    <>
-      <Container posts={posts} />
-      <div className="posts-container">
-        
-      </div>
-    </>
-  );
+  
+  // console.log(posts);
+
+  
+
+  return <Container posts={posts} />;
 }
 
 export default Home;
