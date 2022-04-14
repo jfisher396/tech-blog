@@ -7,7 +7,7 @@ function Container(props) {
     <div className="container">
       <div>
         {props.posts.map((post, index, array) => {
-          console.log(array[index])
+          console.log(post.createdAt.slice(0,10))
           return (
             <div key={post.id} className="card">
               <header className="card-header">
@@ -15,7 +15,7 @@ function Container(props) {
               </header>
               <div className="card-content">
                 <p>{post.postBody}</p>
-                <p>Posted by: {array[index].user.username} on {post.createdAt}</p>
+                <p>Posted by: {array[index].user.username} on {post.createdAt.slice(0,10)} at {post.createdAt.slice(11,16)}</p>
               </div>
               
             </div>
