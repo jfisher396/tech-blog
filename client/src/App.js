@@ -7,20 +7,24 @@ import Dashboard from "./pages/Dashboard/Dashboard";
 import API from "./utils/API"
 
 function App() {
-
+  // controls state for login data
   const [loginFormData, setLoginFormData] = useState({
     username: "",
     password: "",
   });
 
+  // holds current user information in state
   const [currentUser, setCurrentUser] = useState();
 
+  // gets current session data and sets to state
   useEffect(() => {
     API.getCurrentUser().then((res) => {
       setCurrentUser(res.data.user);
     });
   }, []);
 
+  // handler for login form
+  // sets values of inputs to state as loginFormData
   const handleLoginInputChange = (event) => {
     const { name, value } = event.target;
     setLoginFormData({
@@ -29,6 +33,9 @@ function App() {
     });
   };
 
+  // submit handler for login button
+  // clears out inputs
+  // sets current user information to state as currentUser
   const handleLoginFormSubmit = (event) => {
     event.preventDefault();
     API.userLogin(loginFormData)
@@ -47,7 +54,8 @@ function App() {
       });
   };
 
-  const userLogout = () => {
+  // click handler for "logout" button
+  const handleUserLogout = () => {
     API.userLogout().then((res) => {
       setCurrentUser();
     });
@@ -62,7 +70,7 @@ function App() {
           loginFormData={loginFormData}
           inputChange={handleLoginInputChange}
           loginSubmit={handleLoginFormSubmit}
-          logout={userLogout}
+          logout={handleUserLogout}
         />
         <Routes>
           <Route index element={<Home />} />
