@@ -2,9 +2,22 @@ import React from "react";
 
 function SignupForm(props) {
   return (
-    <form onSubmit={props.handleSubmit}>
-      <div className="mb-3">
-        <label htmlFor="email" className="form-label">
+    <form className="field" onSubmit={props.handleSubmit}>
+      <div className="control">
+        <label htmlFor="username" className="label">
+          Username
+        </label>
+        <input
+          onChange={props.handleInputChange}
+          value={props.newUserUsername}
+          type="text"
+          name="username"
+          className="input"
+        />
+        
+      </div>
+      <div className="control">
+        <label htmlFor="email" className="label">
           Email address
         </label>
         <input
@@ -12,15 +25,14 @@ function SignupForm(props) {
           value={props.newUserEmail}
           type="email"
           name="email"
-          className="form-control"
-          aria-describedby="emailHelp"
+          className="input"
         />
         <div id="emailHelp" className="form-text">
           We'll never share your email with anyone else.
         </div>
       </div>
-      <div className="mb-3">
-        <label htmlFor="password" className="form-label">
+      <div className="control">
+        <label htmlFor="password" className="label">
           Password
         </label>
         <input
@@ -28,10 +40,10 @@ function SignupForm(props) {
           value={props.newUserPassword}
           type="password"
           name="password"
-          className="form-control"
+          className="input"
         />
       </div>
-      <button type="submit" className="btn btn-primary">
+      <button type="submit" className="button is-success">
         Submit
       </button>
     </form>
