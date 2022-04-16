@@ -19,8 +19,6 @@ function Home() {
     });
   }
 
-  // console.log(posts);
-
   return (
     <Container>
       {posts.map((post, index, array) => (

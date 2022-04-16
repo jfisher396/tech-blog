@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Container from "../../components/Container/Container";
-import SignupForm from "../../components/SignupForm/SignupForm";
+import SignupForm from "../../components/SignUpForm/SignupForm";
 import API from "../../utils/API";
 
 function Register() {
   const [registerData, setRegisterData] = useState({
+    username: "",
     email: "",
     password: "",
   });
@@ -18,7 +19,7 @@ function Register() {
     });
   };
 
-  let history = useHistory();
+  let navigate = useNavigate();
 
   const handleSubmitButton = (event) => {
     event.preventDefault();
@@ -26,17 +27,19 @@ function Register() {
       API.newUser(registerData)
         .then(() => {
           setRegisterData({
+            username: "",
             email: "",
             password: "",
           });
           alert(
             "Thank you for registering! Please login at the top of the page."
           );
-          history.push("/");
+          navigate.push("/");
         })
         .catch((err) => {
           alert("Registration failed. Email already in use.");
           setRegisterData({
+            username: "",
             email: "",
             password: "",
           });
