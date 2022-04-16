@@ -26,8 +26,9 @@ function Home() {
       {posts.map((post, index, array) => (
         <Card
           key={post.id}
+          id={post.id}
           postTitle={post.title}
-          postBody={post.body}
+          postBody={post.postBody}
           postCreator={array[index].user.username}
           postCreatedDate={post.createdAt.slice(0, 10)}
           postCreatedTime={post.createdAt.slice(11, 16)}

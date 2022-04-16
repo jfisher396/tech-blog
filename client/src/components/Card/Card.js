@@ -1,8 +1,9 @@
 import React from "react";
 
 function Card(props) {
+  console.log(props)
   return (
-    <div key={props.key} className="card">
+    <div id={props.id} className="card">
       <header className="card-header">
         <div className="card-header-title">{props.postTitle}</div>
       </header>
