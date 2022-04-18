@@ -4,7 +4,7 @@ import Container from "../../components/Container/Container";
 import SignupForm from "../../components/SignUpForm/SignupForm";
 import API from "../../utils/API";
 
-function Register() {
+function Register(props) {
   const [registerData, setRegisterData] = useState({
     username: "",
     email: "",
@@ -19,25 +19,28 @@ function Register() {
     });
   };
 
+  const loginAfterSignup = (data) => {
+    console.log(data)
+    props.loginHandleFormSubmit(data)
+  }
+
   let navigate = useNavigate();
 
   const handleSubmitButton = (event) => {
     event.preventDefault();
-    if (registerData.email && registerData.password) {
+    if (registerData.username && registerData.email && registerData.password) {
       API.newUser(registerData)
         .then(() => {
           setRegisterData({
             username: "",
             email: "",
             password: "",
-          });
-          alert(
-            "Thank you for registering! Please login at the top of the page."
-          );
-          navigate.push("/");
+          })
+          loginAfterSignup(registerData);
+          navigate("/");
         })
         .catch((err) => {
-          alert("Registration failed. Email already in use.");
+          // alert("Registration failed. Email already in use.");
           setRegisterData({
             username: "",
             email: "",
@@ -56,6 +59,7 @@ function Register() {
         <SignupForm
           handleInputChange={handleInputChange}
           handleSubmit={handleSubmitButton}
+          newUserUsername={registerData.username}
           newUserEmail={registerData.email}
           newUserPassword={registerData.password}
         />

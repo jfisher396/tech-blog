@@ -4,8 +4,8 @@ import "./App.css";
 import Navbar from "./components/Navbar/Navbar";
 import Home from "./pages/Home/Home";
 import Dashboard from "./pages/Dashboard/Dashboard";
-import Register from "./pages/Register/Register"
-import API from "./utils/API"
+import Register from "./pages/Register/Register";
+import API from "./utils/API";
 
 function App() {
   // controls state for login data
@@ -35,10 +35,11 @@ function App() {
   };
 
   // submit handler for login button
-  // clears out inputs
+  // clears out inputs in state
   // sets current user information to state as currentUser
   const handleLoginFormSubmit = (event) => {
     event.preventDefault();
+    console.log(loginFormData)
     API.userLogin(loginFormData)
       .then((res) => {
         setLoginFormData({
@@ -62,7 +63,6 @@ function App() {
     });
   };
 
-
   return (
     <div className="App">
       <BrowserRouter>
@@ -76,7 +76,7 @@ function App() {
         <Routes>
           <Route index element={<Home />} />
           <Route path="dashboard" element={<Dashboard />} />
-          <Route path="register" element={<Register />} />
+          <Route path="register" element={<Register handleLogin={handleLoginFormSubmit}/>} />
         </Routes>
       </BrowserRouter>
     </div>
