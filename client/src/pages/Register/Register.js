@@ -32,7 +32,7 @@ function Register(props) {
             password: "",
           })
           
-          navigate("/");
+          navigate("/dashboard");
         })
         .catch((err) => {
           // alert("Registration failed. Email already in use.");
