@@ -19,11 +19,6 @@ function Register(props) {
     });
   };
 
-  const loginAfterSignup = (data) => {
-    console.log(data)
-    props.loginHandleFormSubmit(data)
-  }
-
   let navigate = useNavigate();
 
   const handleSubmitButton = (event) => {
@@ -36,7 +31,7 @@ function Register(props) {
             email: "",
             password: "",
           })
-          loginAfterSignup(registerData);
+          
           navigate("/");
         })
         .catch((err) => {

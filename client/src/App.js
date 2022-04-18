@@ -76,7 +76,7 @@ function App() {
         <Routes>
           <Route index element={<Home />} />
           <Route path="dashboard" element={<Dashboard />} />
-          <Route path="register" element={<Register handleLogin={handleLoginFormSubmit}/>} />
+          <Route path="register" element={<Register />} />
         </Routes>
       </BrowserRouter>
     </div>

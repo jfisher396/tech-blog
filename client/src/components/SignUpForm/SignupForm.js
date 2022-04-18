@@ -1,6 +1,8 @@
 import React from "react";
 
 function SignupForm(props) {
+
+  // console.log(props)
   return (
     <form className="field" onSubmit={props.handleSubmit}>
       <div className="control">
@@ -43,7 +45,7 @@ function SignupForm(props) {
           className="input"
         />
       </div>
-      <button type="submit" className="button is-success">
+      <button type="submit" className="button is-success" >
         Submit
       </button>
     </form>
