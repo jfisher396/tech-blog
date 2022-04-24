@@ -37,10 +37,10 @@ export default function Navbar(props) {
             <Link to="/" className="navbar-item">
               Home
             </Link>
-
-            <Link to="/dashboard" className="navbar-item">
+            {props.currentUser && <Link to="/dashboard" className="navbar-item">
               Dashboard
-            </Link>
+            </Link>}
+            
           </div>
 
           {/* login form and login/logout buttons */}
