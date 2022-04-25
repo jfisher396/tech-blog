@@ -11,7 +11,7 @@ router.post("/", authorization, async (req, res) => {
   try {
     const newPost = await Post.create({
       ...body,
-      user_Id: req.session.user.id,
+      user_id: req.session.user.id,
     });
     res.json(newPost);
   } catch (err) {
