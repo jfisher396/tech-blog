@@ -7,6 +7,11 @@ class Dashboard extends Component {
   state = {
     userPosts: [],
     newPostFormBoolean: false,
+    showNewPostButton: true,
+    newPost: {
+      title: "",
+      body: "",
+    },
   };
 
   componentDidMount() {
@@ -17,7 +22,27 @@ class Dashboard extends Component {
 
   showNewPostFormButton = (e) => {
     e.preventDefault();
-    this.setState({ newPostFormBoolean: true });
+    this.setState({
+      newPostFormBoolean: true,
+      showNewPostButton: false,
+    });
+  };
+
+  handleInputChange = (e) => {
+    const { name, value } = e.target;
+    this.setState({
+      newPost: {
+        ...this.state.newPost,
+        [name]: value,
+      },
+    });
+  };
+
+  handleNewPostFormSubmit = (e) => {
+    e.preventDefault();
+    API.newPost(this.state.newPost).then((res) => {
+      console.log(res);
+    });
   };
 
   render() {
@@ -25,35 +50,59 @@ class Dashboard extends Component {
 
     return (
       <Container>
-        <h1>Dashboard</h1>
-        <button
-          type="submit"
-          className="button is-success"
-          onClick={this.showNewPostFormButton}
-        >
-          New Post
-        </button>
+        <h1>User Dashboard</h1>
+        {this.state.showNewPostButton && (
+          <button
+            type="submit"
+            className="button is-success"
+            onClick={this.showNewPostFormButton}
+          >
+            New Post
+          </button>
+        )}
 
         {this.state.newPostFormBoolean && (
-          <form className="field">
-            <label className="label">Title</label>
-            <div className="control">
-              <input
-                className="input"
-                type="text"
-                name="post-title"
-                placeholder="Enter post title"
-              />
-              <label class="label">Message</label>
+          <>
+            <label className="label" htmlFor="new-post-form">
+              Add a new post:
+            </label>
+            <form
+              className="field"
+              id="new-post-form"
+              onSubmit={this.handleNewPostFormSubmit}
+            >
+              <label className="label" htmlFor="post-title">
+                Title
+              </label>
               <div className="control">
-                <textarea
-                  className="textarea"
-                  name="post-body"
-                  placeholder="Enter your post here"
-                ></textarea>
+                <input
+                  onChange={this.handleInputChange}
+                  id="post-title"
+                  className="input"
+                  type="text"
+                  name="title"
+                  value={this.state.newPost.title}
+                  placeholder="Enter post title"
+                />
+                <label className="label" htmlFor="post-body">
+                  Message
+                </label>
+                <div className="control">
+                  <textarea
+                    onChange={this.handleInputChange}
+                    id="post-body"
+                    className="textarea"
+                    name="body"
+                    value={this.state.newPost.body}
+                    placeholder="Enter your post here"
+                  ></textarea>
+                </div>
               </div>
-            </div>
-          </form>
+              <button type="submit" className="button is-success">
+                Submit
+              </button>
+            </form>
+          </>
         )}
 
         {this.state.userPosts.map((post, index, array) => (

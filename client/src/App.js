@@ -15,7 +15,9 @@ function App() {
   });
 
   // holds current user information in state
-  const [currentUser, setCurrentUser] = useState();
+  const [currentUser, setCurrentUser] = useState({
+
+  });
 
   // gets current session data and sets to state
   useEffect(() => {

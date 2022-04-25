@@ -6,11 +6,11 @@ const { Post, Comment, User } = require("../../models");
 // route to create a new post and save to DB
 router.post("/", authorization, async (req, res) => {
   const body = req.body;
-
+  console.log("req.body", body)
   try {
     const newPost = await Post.create({
       ...body,
-      // user_Id: req.body.user_Id,
+      user_Id: req.session.user_Id,
     });
     res.json(newPost);
   } catch (err) {
