@@ -10,7 +10,7 @@ class Dashboard extends Component {
     showNewPostButton: true,
     newPost: {
       title: "",
-      body: "",
+      postBody: "",
     },
   };
 
@@ -92,8 +92,8 @@ class Dashboard extends Component {
                     onChange={this.handleInputChange}
                     id="post-body"
                     className="textarea"
-                    name="body"
-                    value={this.state.newPost.body}
+                    name="postBody"
+                    value={this.state.newPost.postBody}
                     placeholder="Enter your post here"
                   ></textarea>
                 </div>

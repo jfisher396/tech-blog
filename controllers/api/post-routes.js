@@ -7,10 +7,11 @@ const { Post, Comment, User } = require("../../models");
 router.post("/", authorization, async (req, res) => {
   const body = req.body;
   console.log("req.body", body)
+  console.log(req.session.user.id)
   try {
     const newPost = await Post.create({
       ...body,
-      user_Id: req.session.user_Id,
+      user_Id: req.session.user.id,
     });
     res.json(newPost);
   } catch (err) {
