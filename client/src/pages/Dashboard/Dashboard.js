@@ -42,8 +42,16 @@ class Dashboard extends Component {
     e.preventDefault();
 
     if (this.state.newPost.title && this.state.newPost.postBody) {
-      API.newPost(this.state.newPost).then((res) => {
-        console.log(res);
+      API.newPost(this.state.newPost).then(() => {
+        this.setState({
+          newPost: {
+            title: "",
+            postBody: "",
+          },
+          newPostFormBoolean: false,
+          showNewPostButton: true,
+        });
+        
       });
     }
   };
@@ -60,7 +68,7 @@ class Dashboard extends Component {
             className="button is-success"
             onClick={this.showNewPostFormButton}
           >
-            New Post
+             Add New Post
           </button>
         )}
 
