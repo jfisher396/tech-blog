@@ -40,9 +40,12 @@ class Dashboard extends Component {
 
   handleNewPostFormSubmit = (e) => {
     e.preventDefault();
-    API.newPost(this.state.newPost).then((res) => {
-      console.log(res);
-    });
+
+    if (this.state.newPost.title && this.state.newPost.postBody) {
+      API.newPost(this.state.newPost).then((res) => {
+        console.log(res);
+      });
+    }
   };
 
   render() {
