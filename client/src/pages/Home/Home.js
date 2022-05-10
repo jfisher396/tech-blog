@@ -25,7 +25,7 @@ function Home() {
         <Card
           key={post.id}
           id={post.id}
-          postTitle={post.title}
+          postTitle={post.postTitle}
           postBody={post.postBody}
           postCreator={array[index].user.username}
           postCreatedDate={post.createdAt.slice(0, 10)}

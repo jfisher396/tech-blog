@@ -15,8 +15,7 @@ function Card(props) {
       <div className="card-footer">
         <div className="card-footer-item">
           <p>
-            Posted by: {props.postCreator} on {props.postCreatedDate} at
-            {props.postCreatedTime}
+            Posted by: {props.postCreator} on {props.postCreatedDate} at {props.postCreatedTime}
           </p>
         </div>
       </div>

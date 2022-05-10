@@ -16,7 +16,7 @@ export default function Navbar(props) {
         {/* renders site name and sets navigation to homepage */}
         <div className="navbar-brand">
           <Link to="/" className="navbar-item" href="#">
-            TECH-BLOG
+            The Latest...
           </Link>
           <a
             role="button"

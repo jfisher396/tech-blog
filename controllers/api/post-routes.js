@@ -21,7 +21,7 @@ router.post("/", authorization, async (req, res) => {
 
 // route to update a post
 router.put("/:id", authorization, async (req, res) => {
-  console.log(req.body)
+  
   try {
     const [affectedRows] = await Post.update(req.body, {
       where: {
@@ -98,6 +98,7 @@ router.get("/byuser/:id", authorization, async (req, res) => {
 
 // route to delete a post
 router.delete('/:id', authorization, async (req, res) => {
+
   try {
     const [affectedRows] = Post.destroy({
       where: {
@@ -113,6 +114,7 @@ router.delete('/:id', authorization, async (req, res) => {
   } catch (err) {
     res.status(500).json(err);
   }
+  
 });
 
 module.exports = router;

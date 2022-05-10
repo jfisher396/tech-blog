@@ -23,19 +23,11 @@ class Dashboard extends Component {
     API.getUserPosts().then((res) => {
       this.setState({ userPosts: res.data });
     });
-  }
+  };
 
   componentDidMount() {
-    this.getPosts()
+    this.getPosts();
   }
-
-  // componentDidUpdate(prevState) {
-  //   if(prevState.editPostFormBoolean !== this.state.editPostFormBoolean) {
-  //     API.getUserPosts().then((res) => {
-  //     this.setState({ userPosts: res.data });
-  //   });
-  //   }
-  // }
 
   showNewPostFormButton = (e) => {
     e.preventDefault();
@@ -57,7 +49,6 @@ class Dashboard extends Component {
 
   handleNewPostFormSubmit = (e) => {
     e.preventDefault();
-    console.log("submit button clicked")
     if (this.state.newPost.postTitle && this.state.newPost.postBody) {
       API.newPost(this.state.newPost).then(() => {
         this.setState({
@@ -67,13 +58,11 @@ class Dashboard extends Component {
           },
           newPostFormBoolean: false,
           showNewPostButton: true,
-          
         });
-        this.getPosts()
+        this.getPosts();
       });
     }
   };
-
 
   handlePostSelect = (post) => {
     this.setState({
@@ -95,26 +84,33 @@ class Dashboard extends Component {
   };
 
   handleEditFormSubmit = (e) => {
-     e.preventDefault();
-     API.editPost(this.state.postUpdate).then(() => {
-       this.setState({
-          editPostFormBoolean: false
-       })
-       this.getPosts()
-     })
-  }
+    e.preventDefault();
+    API.editPost(this.state.postUpdate).then(() => {
+      this.setState({
+        editPostFormBoolean: false,
+      });
+      this.getPosts();
+    });
+  };
 
-  
+  handlePostDelete = (e) => {
+    e.preventDefault();
+    API.deletePost(this.state.postUpdate.id).then(() => {
+      this.setState({
+        editPostFormBoolean: false,
+      });
+      this.getPosts();
+    });
+  };
+
   render() {
-    // console.log(this.state.userPosts)
-
     return (
       <>
         {/* page heading */}
         <h1 className="is-size-2 has-text-centered">User Dashboard</h1>
 
         {/* show add new post button when not showing form */}
-        {(this.state.showNewPostButton && !this.state.editPostFormBoolean) && (
+        {this.state.showNewPostButton && !this.state.editPostFormBoolean && (
           <button
             type="submit"
             className="button is-success"
@@ -169,7 +165,6 @@ class Dashboard extends Component {
           </>
         )}
 
-
         {this.state.editPostFormBoolean && (
           <>
             <label className="label" htmlFor="edit-post-form">
@@ -191,7 +186,6 @@ class Dashboard extends Component {
                   type="text"
                   name="postTitle"
                   value={this.state.postUpdate.postTitle}
-                  
                 />
                 <label className="label" htmlFor="post-body">
                   Message
@@ -203,20 +197,30 @@ class Dashboard extends Component {
                     className="textarea"
                     name="postBody"
                     value={this.state.postUpdate.postBody}
-                    
                   ></textarea>
                 </div>
               </div>
-              <button type="submit" className="button is-success" onClick={this.handleEditFormSubmit}>
+              <button
+                type="submit"
+                className="button is-success"
+                onClick={this.handleEditFormSubmit}
+              >
                 Submit
+              </button>
+              <button
+                type="submit"
+                className="button is-danger"
+                onClick={this.handlePostDelete}
+              >
+                Delete Post
               </button>
             </form>
           </>
         )}
 
-
         <Container>
-          {(!this.state.newPostFormBoolean && !this.state.editPostFormBoolean) &&
+          {!this.state.newPostFormBoolean &&
+            !this.state.editPostFormBoolean &&
             this.state.userPosts.map((post, index, array) => (
               <Card
                 handlePostSelect={this.handlePostSelect}

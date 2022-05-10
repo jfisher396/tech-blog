@@ -12,8 +12,10 @@ const API = {
     return axios.post(`/api/posts`, postData)
   },
   editPost: function (postData) {
-    console.log(postData)
     return axios.put(`/api/posts/:id`, postData)
+  },
+  deletePost: function (id) {
+    return axios.delete(`/api/posts/${id}`) 
   },
   newUser: function (userData) {
     return axios.post(`/api/users/signup`, userData);
