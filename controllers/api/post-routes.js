@@ -21,7 +21,7 @@ router.post("/", authorization, async (req, res) => {
 
 // route to update a post
 router.put("/:id", authorization, async (req, res) => {
-  console.log(req.body);
+  
   try {
     const [affectedRows] = await Post.update(req.body, {
       where: {
