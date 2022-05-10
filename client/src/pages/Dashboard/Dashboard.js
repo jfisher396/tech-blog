@@ -3,6 +3,10 @@ import Container from "../../components/Container/Container";
 import Card from "../../components/Card/Card";
 import API from "../../utils/API";
 
+// TODO: when post is clicked, the post gets rendered in a form
+// TODO: post info needs to be set to state from db
+// TODO: a handleinputchange for that form is needed
+
 class Dashboard extends Component {
   state = {
     userPosts: [],
@@ -12,6 +16,7 @@ class Dashboard extends Component {
       title: "",
       postBody: "",
     },
+    postUpdate: {}
   };
 
   componentDidMount() {
@@ -38,9 +43,14 @@ class Dashboard extends Component {
     });
   };
 
-  handlePostEdit = (id) => {
-    console.log("post clicked")
-    console.log(id)
+  handlePostEdit = (post) => {
+    this.setState({
+      postUpdate: {
+        ...post
+      }
+    })
+    
+    
   }
 
   handleNewPostFormSubmit = (e) => {

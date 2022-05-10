@@ -7,7 +7,7 @@ function Card(props) {
   return (
     <div id={props.id} className="card">
       <header className="card-header">
-        <button className="card-header-title__button" onClick={() => props.handlePostEdit(props.id)}><div className="card-header-title">{props.postTitle}</div></button>
+        <button className="card-header-title__button" onClick={() => props.handlePostEdit(props)}><div className="card-header-title">{props.postTitle}</div></button>
       </header>
       <div className="card-content">
         <p>{props.postBody}</p>
