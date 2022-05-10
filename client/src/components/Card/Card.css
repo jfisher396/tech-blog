@@ -1,0 +1,11 @@
+.card {
+    width: 30rem;
+    margin-top: 40px;
+    justify-content: space-between;
+}
+
+.card-header-title__button {
+    width: 100%;
+    border: none;
+    cursor: pointer;
+}

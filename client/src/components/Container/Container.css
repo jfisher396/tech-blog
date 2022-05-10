@@ -1,6 +1,7 @@
-.Container {
+.container {
     display: flex;
     flex-flow: row wrap;
     justify-content: space-around;
     margin-bottom: 100px;
+    background-color: lightgray;
 }

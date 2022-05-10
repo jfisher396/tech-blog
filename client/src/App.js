@@ -35,13 +35,13 @@ function App() {
       [name]: value,
     });
   };
+  
 
   // submit handler for login button
   // clears out inputs in state
   // sets current user information to state as currentUser
   const handleLoginFormSubmit = (event) => {
     event.preventDefault();
-    console.log(loginFormData)
     API.userLogin(loginFormData)
       .then((res) => {
         setLoginFormData({
@@ -51,7 +51,8 @@ function App() {
         API.getCurrentUser().then((res) => {
           setCurrentUser(res.data.user);
         });
-        window.location.reload(false);
+        
+        // window.location.reload(false);
       })
       .catch((err) => {
         alert("login failed");
