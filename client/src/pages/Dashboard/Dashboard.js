@@ -4,7 +4,6 @@ import Card from "../../components/Card/Card";
 import API from "../../utils/API";
 
 // TODO: when post is clicked, the post gets rendered in a form
-// TODO: post info needs to be set to state from db
 // TODO: a handleinputchange for that form is needed
 
 class Dashboard extends Component {
@@ -12,11 +11,12 @@ class Dashboard extends Component {
     userPosts: [],
     newPostFormBoolean: false,
     showNewPostButton: true,
+    editPostFormBoolean: false,
     newPost: {
       title: "",
       postBody: "",
     },
-    postUpdate: {}
+    postUpdate: {},
   };
 
   componentDidMount() {
@@ -43,16 +43,6 @@ class Dashboard extends Component {
     });
   };
 
-  handlePostEdit = (post) => {
-    this.setState({
-      postUpdate: {
-        ...post
-      }
-    })
-    
-    
-  }
-
   handleNewPostFormSubmit = (e) => {
     e.preventDefault();
 
@@ -66,27 +56,51 @@ class Dashboard extends Component {
           newPostFormBoolean: false,
           showNewPostButton: true,
         });
-        
       });
     }
   };
 
+
+  handlePostSelect = (post) => {
+    this.setState({
+      postUpdate: {
+        ...post,
+      },
+      editPostFormBoolean: true,
+    });
+  };
+
+  handleEditFormInputChange = (e) => {
+    const { name, value } = e.target;
+    this.setState({
+      postUpdate: {
+        ...this.state.postUpdate,
+        [name]: value,
+      },
+    });
+  };
+
+  
   render() {
     // console.log(this.state.userPosts)
 
     return (
-      <Container>
+      <>
+        {/* page heading */}
         <h1>User Dashboard</h1>
+
+        {/* show add new post button when not showing form */}
         {this.state.showNewPostButton && (
           <button
             type="submit"
             className="button is-success"
             onClick={this.showNewPostFormButton}
           >
-             Add New Post
+            Add New Post
           </button>
         )}
 
+        {/* once add new post button is clicked, show form to add post */}
         {this.state.newPostFormBoolean && (
           <>
             <label className="label" htmlFor="new-post-form">
@@ -131,19 +145,67 @@ class Dashboard extends Component {
           </>
         )}
 
-        {this.state.userPosts.map((post, index, array) => (
-          <Card
-            handlePostEdit={this.handlePostEdit}
-            key={post.id}
-            id={post.id}
-            postTitle={post.title}
-            postBody={post.postBody}
-            // postCreator={array[index].user.username}
-            postCreatedDate={post.createdAt.slice(0, 10)}
-            postCreatedTime={post.createdAt.slice(11, 16)}
-          />
-        ))}
-      </Container>
+        {this.state.editPostFormBoolean && (
+          <>
+            <label className="label" htmlFor="edit-post-form">
+              Edit your post:
+            </label>
+            <form
+              className="field"
+              id="edit-post-form"
+              onSubmit={this.handleEditPostFormSubmit}
+            >
+              <label className="label" htmlFor="post-title">
+                Title
+              </label>
+              <div className="control">
+                <input
+                  onChange={this.handleEditFormInputChange}
+                  id="post-title"
+                  className="input"
+                  type="text"
+                  name="title"
+                  value={this.state.postUpdate.postTitle}
+                  
+                />
+                <label className="label" htmlFor="post-body">
+                  Message
+                </label>
+                <div className="control">
+                  <textarea
+                    onChange={this.handleEditFormInputChange}
+                    id="post-body"
+                    className="textarea"
+                    name="postBody"
+                    value={this.state.postUpdate.postBody}
+                    
+                  ></textarea>
+                </div>
+              </div>
+              <button type="submit" className="button is-success">
+                Submit
+              </button>
+            </form>
+          </>
+        )}
+
+
+        <Container>
+          {(!this.state.newPostFormBoolean && !this.state.editPostFormBoolean) &&
+            this.state.userPosts.map((post, index, array) => (
+              <Card
+                handlePostSelect={this.handlePostSelect}
+                key={post.id}
+                id={post.id}
+                postTitle={post.title}
+                postBody={post.postBody}
+                // postCreator={array[index].user.username}
+                postCreatedDate={post.createdAt.slice(0, 10)}
+                postCreatedTime={post.createdAt.slice(11, 16)}
+              />
+            ))}
+        </Container>
+      </>
     );
   }
 }
