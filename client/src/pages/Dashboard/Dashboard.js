@@ -80,6 +80,11 @@ class Dashboard extends Component {
     });
   };
 
+  handleEditFormSubmit = (e) => {
+     e.preventDefault();
+     console.log("edit form submit button clicked")
+  }
+
   
   render() {
     // console.log(this.state.userPosts)
@@ -87,10 +92,10 @@ class Dashboard extends Component {
     return (
       <>
         {/* page heading */}
-        <h1>User Dashboard</h1>
+        <h1 className="is-size-2 has-text-centered">User Dashboard</h1>
 
         {/* show add new post button when not showing form */}
-        {this.state.showNewPostButton && (
+        {(this.state.showNewPostButton && !this.state.editPostFormBoolean) && (
           <button
             type="submit"
             className="button is-success"
@@ -145,6 +150,7 @@ class Dashboard extends Component {
           </>
         )}
 
+
         {this.state.editPostFormBoolean && (
           <>
             <label className="label" htmlFor="edit-post-form">
@@ -182,7 +188,7 @@ class Dashboard extends Component {
                   ></textarea>
                 </div>
               </div>
-              <button type="submit" className="button is-success">
+              <button type="submit" className="button is-success" onClick={this.handleEditFormSubmit}>
                 Submit
               </button>
             </form>
