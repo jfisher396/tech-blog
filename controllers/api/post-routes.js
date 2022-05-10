@@ -96,6 +96,7 @@ router.get("/byuser/:id", authorization, async (req, res) => {
   }
 });
 
+// route to delete a post
 router.delete('/:id', authorization, async (req, res) => {
   try {
     const [affectedRows] = Post.destroy({

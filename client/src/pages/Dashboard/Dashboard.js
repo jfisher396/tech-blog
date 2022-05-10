@@ -38,6 +38,11 @@ class Dashboard extends Component {
     });
   };
 
+  handlePostEdit = (id) => {
+    console.log("post clicked")
+    console.log(id)
+  }
+
   handleNewPostFormSubmit = (e) => {
     e.preventDefault();
 
@@ -118,6 +123,7 @@ class Dashboard extends Component {
 
         {this.state.userPosts.map((post, index, array) => (
           <Card
+            handlePostEdit={this.handlePostEdit}
             key={post.id}
             id={post.id}
             postTitle={post.title}
