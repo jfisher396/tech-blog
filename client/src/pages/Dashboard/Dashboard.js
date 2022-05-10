@@ -82,7 +82,9 @@ class Dashboard extends Component {
 
   handleEditFormSubmit = (e) => {
      e.preventDefault();
-     console.log("edit form submit button clicked")
+     API.editPost(this.state.postUpdate).then(() => {
+       
+     })
   }
 
   
