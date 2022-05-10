@@ -13,7 +13,7 @@ class Dashboard extends Component {
     showNewPostButton: true,
     editPostFormBoolean: false,
     newPost: {
-      title: "",
+      postTitle: "",
       postBody: "",
     },
     postUpdate: {},
@@ -57,17 +57,19 @@ class Dashboard extends Component {
 
   handleNewPostFormSubmit = (e) => {
     e.preventDefault();
-
-    if (this.state.newPost.title && this.state.newPost.postBody) {
+    console.log("submit button clicked")
+    if (this.state.newPost.postTitle && this.state.newPost.postBody) {
       API.newPost(this.state.newPost).then(() => {
         this.setState({
           newPost: {
-            title: "",
+            postTitle: "",
             postBody: "",
           },
           newPostFormBoolean: false,
           showNewPostButton: true,
+          
         });
+        this.getPosts()
       });
     }
   };
@@ -142,8 +144,8 @@ class Dashboard extends Component {
                   id="post-title"
                   className="input"
                   type="text"
-                  name="title"
-                  value={this.state.newPost.title}
+                  name="postTitle"
+                  value={this.state.newPost.postTitle}
                   placeholder="Enter post title"
                 />
                 <label className="label" htmlFor="post-body">
@@ -187,7 +189,7 @@ class Dashboard extends Component {
                   id="post-title"
                   className="input"
                   type="text"
-                  name="title"
+                  name="postTitle"
                   value={this.state.postUpdate.postTitle}
                   
                 />
@@ -220,7 +222,7 @@ class Dashboard extends Component {
                 handlePostSelect={this.handlePostSelect}
                 key={post.id}
                 id={post.id}
-                postTitle={post.title}
+                postTitle={post.postTitle}
                 postBody={post.postBody}
                 // postCreator={array[index].user.username}
                 postCreatedDate={post.createdAt.slice(0, 10)}
