@@ -19,11 +19,23 @@ class Dashboard extends Component {
     postUpdate: {},
   };
 
-  componentDidMount() {
+  getPosts = () => {
     API.getUserPosts().then((res) => {
       this.setState({ userPosts: res.data });
     });
   }
+
+  componentDidMount() {
+    this.getPosts()
+  }
+
+  // componentDidUpdate(prevState) {
+  //   if(prevState.editPostFormBoolean !== this.state.editPostFormBoolean) {
+  //     API.getUserPosts().then((res) => {
+  //     this.setState({ userPosts: res.data });
+  //   });
+  //   }
+  // }
 
   showNewPostFormButton = (e) => {
     e.preventDefault();
@@ -83,7 +95,10 @@ class Dashboard extends Component {
   handleEditFormSubmit = (e) => {
      e.preventDefault();
      API.editPost(this.state.postUpdate).then(() => {
-       
+       this.setState({
+          editPostFormBoolean: false
+       })
+       this.getPosts()
      })
   }
 
