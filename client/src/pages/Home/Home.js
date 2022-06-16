@@ -30,7 +30,8 @@ function Home() {
 
   return (
     <Container>
-      {posts.map((post, index, array) => (
+
+      {!singlePostView ? posts.map((post, index, array) => (
         <Card
           handlePostSelect={handlePostSelect}
           key={post.id}
@@ -41,7 +42,7 @@ function Home() {
           postCreatedDate={post.createdAt.slice(0, 10)}
           postCreatedTime={post.createdAt.slice(11, 16)}
         />
-      ))}
+      )) : null }
 
       {singlePostView ? (
         <div>
