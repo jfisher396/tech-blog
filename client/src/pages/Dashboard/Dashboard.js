@@ -26,6 +26,7 @@ class Dashboard extends Component {
   };
 
   componentDidMount() {
+    
     this.getPosts();
   }
 

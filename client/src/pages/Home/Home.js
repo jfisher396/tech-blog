@@ -19,10 +19,18 @@ function Home() {
     });
   }
 
+  function handlePostSelect(id) {
+    console.log(id)
+    API.getSinglePost(id).then((res) => {
+      console.log(res.data)
+    })
+  }
+
   return (
     <Container>
       {posts.map((post, index, array) => (
         <Card
+          handlePostSelect={handlePostSelect}
           key={post.id}
           id={post.id}
           postTitle={post.postTitle}
