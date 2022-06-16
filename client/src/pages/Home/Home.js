@@ -19,9 +19,9 @@ function Home() {
     });
   }
 
-  function handlePostSelect(id) {
-    console.log(id)
-    API.getSinglePost(id).then((res) => {
+  function handlePostSelect(post) {
+    console.log(post.id)
+    API.getSinglePost(post.id).then((res) => {
       console.log(res.data)
     })
   }
