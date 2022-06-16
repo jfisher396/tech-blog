@@ -7,6 +7,8 @@ import API from "../../utils/API";
 function Home() {
   // state handler for all posts
   const [posts, setPosts] = useState([]);
+  const [singlePost, setSinglePost] = useState(null);
+  const [singlePostView, setSinglePostView] = useState(false);
 
   // retrieves all posts from database
   useEffect(() => {
@@ -20,10 +22,10 @@ function Home() {
   }
 
   function handlePostSelect(post) {
-    console.log(post.id)
     API.getSinglePost(post.id).then((res) => {
-      console.log(res.data)
-    })
+      setSinglePost(res.data);
+      setSinglePostView(true);
+    });
   }
 
   return (
@@ -40,6 +42,18 @@ function Home() {
           postCreatedTime={post.createdAt.slice(11, 16)}
         />
       ))}
+
+      {singlePostView ? (
+        <div>
+          <p>{singlePost.postTitle}</p>
+          <p>{singlePost.postBody}</p>
+          <p>{singlePost.user.username}</p>
+          <p>{singlePost.createdAt}</p>
+          {singlePost.comments.map((comment) => (
+            <p key={comment.id}>{comment.commentBody}</p>
+          ))}
+        </div>
+      ) : null}
     </Container>
   );
 }
