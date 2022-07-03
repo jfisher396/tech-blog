@@ -15,9 +15,7 @@ app.use(
     secret: "doubleSecretSecret",
     resave: false,
     saveUninitialized: false,
-    cookie: {
-      maxAge: 2 * 60 * 60 * 1000,
-    },
+    cookie: { maxAge: 2 * 60 * 60 * 1000 },
   })
 );
 
