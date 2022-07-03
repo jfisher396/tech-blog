@@ -8,6 +8,7 @@ import Register from "./pages/Register/Register";
 import API from "./utils/API";
 
 function App() {
+
   // controls state for login data
   const [loginFormData, setLoginFormData] = useState({
     username: "",
@@ -15,9 +16,7 @@ function App() {
   });
 
   // holds current user information in state
-  const [currentUser, setCurrentUser] = useState({
-
-  });
+  const [currentUser, setCurrentUser] = useState({});
 
   // gets current session data and sets to state
   useEffect(() => {
@@ -51,8 +50,8 @@ function App() {
         API.getCurrentUser().then((res) => {
           setCurrentUser(res.data.user);
         });
-        
-        // window.location.reload(false);
+        // redirects to user's dashboard upon login
+        window.location.href = "/dashboard"
       })
       .catch((err) => {
         alert("login failed");

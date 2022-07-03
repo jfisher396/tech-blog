@@ -4,7 +4,10 @@ import Container from "../../components/Container/Container";
 import SignupForm from "../../components/SignUpForm/SignupForm";
 import API from "../../utils/API";
 
-function Register(props) {
+function Register() {
+
+  let navigate = useNavigate();
+
   const [registerData, setRegisterData] = useState({
     username: "",
     email: "",
@@ -19,13 +22,13 @@ function Register(props) {
     });
   };
 
-  let navigate = useNavigate();
 
   const handleSubmitButton = (event) => {
     event.preventDefault();
     if (registerData.username && registerData.email && registerData.password) {
       API.newUser(registerData)
         .then(() => {
+          console.log("setRegisterData to empty strings")
           setRegisterData({
             username: "",
             email: "",

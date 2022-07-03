@@ -1,11 +1,11 @@
 import React from "react";
 
 function SignupForm(props) {
-
   // console.log(props)
   return (
     <form className="field" onSubmit={props.handleSubmit}>
       <div className="control">
+        <div className="block"></div>
         <label htmlFor="username" className="label">
           Username
         </label>
@@ -16,8 +16,8 @@ function SignupForm(props) {
           name="username"
           className="input"
         />
-        
       </div>
+      <div className="block"></div>
       <div className="control">
         <label htmlFor="email" className="label">
           Email address
@@ -33,6 +33,7 @@ function SignupForm(props) {
           We'll never share your email with anyone else.
         </div>
       </div>
+      <div className="block"></div>
       <div className="control">
         <label htmlFor="password" className="label">
           Password
@@ -45,7 +46,8 @@ function SignupForm(props) {
           className="input"
         />
       </div>
-      <button type="submit" className="button is-success" >
+      <div className="block"></div>
+      <button type="submit" className="button is-success">
         Submit
       </button>
     </form>
