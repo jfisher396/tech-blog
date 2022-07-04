@@ -1,13 +1,16 @@
 import React from "react";
-import "./Card.css"
+import "./Card.css";
 
 function Card(props) {
-  
-
   return (
     <div id={props.id} className="card">
       <header className="card-header">
-        <button className="card-header-title__button" onClick={() => props.handlePostSelect(props)}><div className="card-header-title">{props.postTitle}</div></button>
+        <button
+          className="card-header-title__button"
+          onClick={() => props.handlePostSelect(props)}
+        >
+          <div className="card-header-title">{props.postTitle}</div>
+        </button>
       </header>
       <div className="card-content">
         <p>{props.postBody}</p>
@@ -15,7 +18,8 @@ function Card(props) {
       <div className="card-footer">
         <div className="card-footer-item">
           <p>
-            Posted by: {props.postCreator} on {props.postCreatedDate} at {props.postCreatedTime}
+            Posted by: {props.postCreator} on {props.postCreatedDate} at{" "}
+            {props.postCreatedTime}
           </p>
         </div>
       </div>

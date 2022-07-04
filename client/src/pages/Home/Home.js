@@ -3,8 +3,10 @@ import "./Home.css";
 import Container from "../../components/Container/Container";
 import Card from "../../components/Card/Card";
 import API from "../../utils/API";
+import SinglePost from "../SinglePost/SinglePost";
 
-function Home() {
+function Home(props) {
+
   // state handler for all posts
   const [posts, setPosts] = useState([]);
   const [singlePost, setSinglePost] = useState(null);
@@ -15,6 +17,14 @@ function Home() {
     loadPosts();
   }, []);
 
+  // if no current user then render returns all posts
+  useEffect(() => {
+    if (!props.currentUser) {
+      setSinglePostView(false)
+    }
+  }, [props.currentUser])
+
+  // loads all posts by all users
   function loadPosts() {
     API.getPosts().then((res) => {
       setPosts(res.data);
@@ -22,10 +32,14 @@ function Home() {
   }
 
   function handlePostSelect(post) {
-    API.getSinglePost(post.id).then((res) => {
-      setSinglePost(res.data);
-      setSinglePostView(true);
-    });
+    if (props.currentUser) {
+      API.getSinglePost(post.id).then((res) => {
+        setSinglePost(res.data);
+        setSinglePostView(true);
+      });
+    } else {
+      alert("You must be logged in")
+    }
   }
 
   return (
@@ -45,37 +59,7 @@ function Home() {
           ))
         : null}
 
-      {singlePostView ? (
-        <div>
-          <div className="block"></div>
-          <p className="is-size-3 px-4">{singlePost.postTitle}</p>
-          <div className="block"></div>
-          <p className="is-size-5 px-4">{singlePost.postBody}</p>
-          <div className="block"></div>
-          <p className="is-size-5 px-4">
-            Posted by: {singlePost.user.username}
-          </p>
-          <div className="block"></div>
-          <p className="is-size-6 px-4">Posted on: {singlePost.createdAt}</p>
-
-          {/* if there are comments then render the header, otherwise don't */}
-          <div className="block"></div>
-          {singlePost.comments.length > 0 ? (
-            <h2 className="is-size-4 px-4">Comments:</h2>
-          ) : null}
-
-          {/* render comments */}
-          {singlePost.comments.map((comment) => (
-            <>
-              <div className="block"></div>
-              <p className="is-size-6 px-5" key={comment.id}>
-                {comment.commentBody}
-              </p>
-              <p>{comment.user_id}</p>
-            </>
-          ))}
-        </div>
-      ) : null}
+      {singlePostView ? <SinglePost singlePost={singlePost} /> : null}
     </Container>
   );
 }

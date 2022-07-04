@@ -5,6 +5,7 @@ import Navbar from "./components/Navbar/Navbar";
 import Home from "./pages/Home/Home";
 import Dashboard from "./pages/Dashboard/Dashboard";
 import Register from "./pages/Register/Register";
+import SinglePost from "./pages/SinglePost/SinglePost";
 import API from "./utils/API";
 
 function App() {
@@ -76,9 +77,10 @@ function App() {
           logout={handleUserLogout}
         />
         <Routes>
-          <Route index element={<Home />} />
-          <Route path="dashboard" currentUser={currentUser} element={currentUser ? <Dashboard /> : <Register />} />
-          <Route path="register" element={<Register />} />
+          <Route index element={<Home currentUser={currentUser}/>} />
+          {/* <Route path="/post" currentUser={currentUser} element={<SinglePost />} /> */}
+          <Route path="/dashboard" currentUser={currentUser} element={currentUser ? <Dashboard /> : <Register />} />
+          <Route path="/register" element={<Register />} />
         </Routes>
       </BrowserRouter>
     </div>
