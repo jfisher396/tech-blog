@@ -14,14 +14,17 @@ class Dashboard extends Component {
       postBody: "",
     },
     postUpdate: {},
+    loading: false,
   };
 
   getPosts = () => {
-    API.getUserPosts().then((res) => {
-      const posts = res.data;
-      console.log(posts);
-      this.setState({ userPosts: posts.sort((a, b) => b.id - a.id) });
-    });
+    API.getUserPosts()
+      .then((res) => {
+        this.setState({ loading: true });
+        const posts = res.data;
+        this.setState({ userPosts: posts.sort((a, b) => b.id - a.id) });
+      })
+      .then(() => this.setState({ loading: false }));
   };
 
   componentDidMount() {
@@ -163,7 +166,7 @@ class Dashboard extends Component {
             </form>
           </>
         )}
-
+        {/* when a post title is clicked a form to edit the post is rendered */}
         {this.state.editPostFormBoolean && (
           <>
             <label className="label" htmlFor="edit-post-form">
@@ -217,8 +220,10 @@ class Dashboard extends Component {
           </>
         )}
 
+        {/* if neither the new post form or edit post form are rendered then show all posts from user */}
         <Container>
-          {!this.state.newPostFormBoolean &&
+          {!this.state.loading &&
+            !this.state.newPostFormBoolean &&
             !this.state.editPostFormBoolean &&
             this.state.userPosts.map((post, index, array) => (
               <Card
@@ -232,6 +237,13 @@ class Dashboard extends Component {
                 postCreatedTime={post.createdAt.slice(11, 16)}
               />
             ))}
+
+          {this.state.loading ? (
+            <progress
+              className="progress is-large is-success"
+              max="100"
+            ></progress>
+          ) : null}
         </Container>
       </>
     );

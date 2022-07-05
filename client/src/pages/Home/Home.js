@@ -10,9 +10,11 @@ function Home(props) {
   const [posts, setPosts] = useState([]);
   const [singlePost, setSinglePost] = useState(null);
   const [singlePostView, setSinglePostView] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   // retrieves all posts from database
   useEffect(() => {
+    setLoading(true);
     loadPosts();
   }, []);
 
@@ -25,10 +27,14 @@ function Home(props) {
 
   // loads all posts by all users
   function loadPosts() {
-    API.getPosts().then((res) => {
-      const posts = res.data;
-      setPosts(posts.sort((a,b) => b.id - a.id));
-    });
+    API.getPosts()
+      .then((res) => {
+        const posts = res.data;
+        setPosts(posts.sort((a, b) => b.id - a.id));
+      })
+      .then(() => {
+        setLoading(false);
+      });
   }
 
   function handlePostSelect(post) {
@@ -44,20 +50,22 @@ function Home(props) {
 
   return (
     <Container>
-      {!singlePostView
-        ? posts.map((post, index, array) => (
-            <Card
-              handlePostSelect={handlePostSelect}
-              key={post.id}
-              id={post.id}
-              postTitle={post.postTitle}
-              postBody={post.postBody}
-              postCreator={array[index].user.username}
-              postCreatedDate={post.createdAt.slice(0, 10)}
-              postCreatedTime={post.createdAt.slice(11, 16)}
-            />
-          ))
-        : null}
+      {!loading && !singlePostView ? (
+        posts.map((post, index, array) => (
+          <Card
+            handlePostSelect={handlePostSelect}
+            key={post.id}
+            id={post.id}
+            postTitle={post.postTitle}
+            postBody={post.postBody}
+            postCreator={array[index].user.username}
+            postCreatedDate={post.createdAt.slice(0, 10)}
+            postCreatedTime={post.createdAt.slice(11, 16)}
+          />
+        ))
+      ) : (
+        <progress className="progress is-large is-success" max="100"></progress>
+      )}
 
       {singlePostView ? <SinglePost singlePost={singlePost} /> : null}
     </Container>
