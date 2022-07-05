@@ -27,7 +27,7 @@ export default function SinglePost(props) {
           <p className="is-size-6 px-5" key={comment.id}>
             {comment.commentBody}
           </p>
-          <p>{comment.user_id}</p>
+          {/* <p>{comment.user}</p> */}
         </>
       ))}
     </div>

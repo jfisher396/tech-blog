@@ -6,7 +6,6 @@ import API from "../../utils/API";
 import SinglePost from "../SinglePost/SinglePost";
 
 function Home(props) {
-
   // state handler for all posts
   const [posts, setPosts] = useState([]);
   const [singlePost, setSinglePost] = useState(null);
@@ -20,14 +19,15 @@ function Home(props) {
   // if no current user then render returns all posts
   useEffect(() => {
     if (!props.currentUser) {
-      setSinglePostView(false)
+      setSinglePostView(false);
     }
-  }, [props.currentUser])
+  }, [props.currentUser]);
 
   // loads all posts by all users
   function loadPosts() {
     API.getPosts().then((res) => {
-      setPosts(res.data);
+      const posts = res.data;
+      setPosts(posts.sort((a,b) => b.id - a.id));
     });
   }
 
@@ -38,7 +38,7 @@ function Home(props) {
         setSinglePostView(true);
       });
     } else {
-      alert("You must be logged in")
+      alert("You must be logged in");
     }
   }
 

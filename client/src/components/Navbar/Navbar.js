@@ -1,10 +1,10 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import LoginForm from "../LoginForm/LoginForm";
 import "./Navbar.css";
 
 export default function Navbar(props) {
-  // const location = useLocation();
+  let navigate = useNavigate();
 
   return (
     <>
@@ -37,10 +37,11 @@ export default function Navbar(props) {
             <Link to="/" className="navbar-item">
               Home
             </Link>
-            {props.currentUser && <Link to="/dashboard" className="navbar-item">
-              Dashboard
-            </Link>}
-            
+            {props.currentUser && (
+              <Link to="/dashboard" className="navbar-item">
+                Dashboard
+              </Link>
+            )}
           </div>
 
           {/* login form and login/logout buttons */}
@@ -48,7 +49,9 @@ export default function Navbar(props) {
             {/* if a user is logged in it shows there user name in navbar and renders logout button */}
             {props.currentUser ? (
               <>
-                <span id="logged-in-as-span">Logged in as {props.currentUser.username}</span>{" "}
+                <span id="logged-in-as-span">
+                  Logged in as {props.currentUser.username}
+                </span>{" "}
                 <button className="button is-success" onClick={props.logout}>
                   Logout
                 </button>
