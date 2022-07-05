@@ -3,9 +3,6 @@ import Container from "../../components/Container/Container";
 import Card from "../../components/Card/Card";
 import API from "../../utils/API";
 
-// TODO: when post is clicked, the post gets rendered in a form
-// TODO: a handleinputchange for that form is needed
-
 class Dashboard extends Component {
   state = {
     userPosts: [],
@@ -21,12 +18,13 @@ class Dashboard extends Component {
 
   getPosts = () => {
     API.getUserPosts().then((res) => {
-      this.setState({ userPosts: res.data });
+      const posts = res.data;
+      console.log(posts);
+      this.setState({ userPosts: posts.sort((a, b) => b.id - a.id) });
     });
   };
 
   componentDidMount() {
-    
     this.getPosts();
   }
 
